@@ -1,0 +1,30 @@
+<div class="container login-content-container">
+    <form th:action="@{/user/edit}" method="post" th:object="${course}" id="courseForm">
+        <h2 class="form-signin-heading">课程信息</h2>
+        <input type="hidden" name="id" th:value="*{id}">
+        <div class="form-group">
+            <label for="name" class="col-form-label">课名</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="*{name}" maxlength="20" placeholder="请输入姓名，至少2个字符，至多20个" >
+        </div>
+        <div class="form-group">
+            <label for="text" class="col-form-label">描述</label>
+            <input type="text" class="form-control" id="text" name="text" th:value="*{text}" maxlength="50" placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+            <label for="projectId" class="col-form-label">所属类型</label>
+            <select class="form-control" id="projectId" name="projectId">
+                <option  th:each="pro:${projectList}" th:if="${pro.id}==*{projectId}" selected="selected"  th:value="${pro.id}" th:text="${pro.name }"></option>
+                <option  th:each="pro:${projectList}"  th:value="${pro.id}" th:text="${pro.name }"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="courseTime" class="col-form-label">课时</label>
+            <input type="number" class="form-control" id="courseTime" name="courseTime"  th:value="*{courseTime}" maxlength="30" placeholder="请输入课时" >
+        </div>
+        <div class="form-group">
+            <label for="money" class="col-form-label">单价</label>
+            <input type="number" class="form-control" id="money" name="money"  th:value="*{money}" maxlength="30" placeholder="单价" >
+        </div>
+    </form>
+</div>
+

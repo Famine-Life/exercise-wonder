@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>首页</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <!--      轮播图          -->
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="../static/images/index_Carousel_1.jpg" th:src="@{images/index_Carousel_1.jpg}" alt="图片1">
+                            <div class="carousel-caption">
+                                健身练习
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="../static/images/index_Carousel_2.jpg" th:src="@{images/index_Carousel_2.jpg}" alt="图片2">
+                            <div class="carousel-caption">
+                                瑜伽项目
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="../static/images/index_Carousel_3.jpg" th:src="@{images/index_Carousel_3.jpg}" alt="图片3">
+                            <div class="carousel-caption">
+                                第三个项目
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">上一张</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">下一张</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div calass="row">
+                    <div class="col-md-12">
+                        <div th:replace="~{fragments/qd::qd}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-header">
+                <h1>我们开设有以下项目<small>欢迎广大群众前来体验</small></h1>
+            </div>
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">瑜伽</h4>
+                        <p class="list-group-item-text">瑜伽姿势运用古老而易于掌握的技巧，改善人们生理、心理、情感和精神方面的能力，是一种达到身体、心灵与精神和谐统一的运动方式，包括调身的体位法、调息的呼吸法、调心的冥想法等，以达至身心的合一。</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">有氧舞蹈</h4>
+                        <p class="list-group-item-text">有氧舞蹈(AEROBICDANCE)一方面能消耗较多热量，一方面能把许多舞蹈动作健美操化，不像健美操动作比较操化，它有许多风格，根据动作、音乐的不同特点分：AEROBICDANCE，HIP-HOP，FUNK，SALSA等有氧舞蹈。</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">游泳</h4>
+                        <p class="list-group-item-text">是的，我们专门开设了教授游泳的课程</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">大众健身操</h4>
+                        <p class="list-group-item-text">运动活动范围涉及全身每个关节，在一节为五十分钟左右的课程中，健身者在音乐、灯光、教练的口令、参与伙伴的鼓励与带动下进行有节奏的、循序渐进的有氧运动。可燃烧大量的脂肪，提高参与者的心肺功能。不失为减肥、保持体能、体型的首选。</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">跑步</h4>
+                        <p class="list-group-item-text">跑步也是适合男士健身的项目之一，对于减肥和锻炼身体都有很好的益出。我们有专业的老师开设课程手把手教您如何正确的跑步！</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">时速单骑(spinnig)</h4>
+                        <p class="list-group-item-text">它是目前欧美最流行的有氧健身项目之一，有人把这项运动称做“自行车上的舞蹈”，通过运动使车轮不停地旋转、还可自行调节运动负荷，运动量可大可小、易学、易练又动感十足，从而达到减少腰腹部的赘肉、健美下肢和提高心肺功能的效果，</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">健身球</h4>
+                        <p class="list-group-item-text">健身球现在不再仅作为一种理疗，它也成为新兴的
+                            健身运动。</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">搏击健美操</h4>
+                        <p class="list-group-item-text">这个项目是结合音乐、舞蹈、拳击、搏击等特点而形成的健美操。搏击健美操与拳击boxing不同的是前者的目标是健身，后者目标是打赢比赛，更易受伤，不适合大众。它是对搏击或健美操的补充。它可以提高自信心，肌肉的协调性和必要的技巧与柔韧性。</p>
+                    </a>
+                    <a th:href="@{courses}" class="list-group-item">
+                        <h4 class="list-group-item-heading">杠铃操</h4>
+                        <p class="list-group-item-text">杠铃操是最能减脂的健身项目，也是能快速瘦身的办法，很多男性朋友也比较钟爱</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">
+                                <img alt="Brand" src="../static/images/yoga-1842292_640.jpg" th:src="@{images/resizeApi.png}">
+                            </a>
+                        </div>
+                        <div class="foot-text">
+                            欢迎加入快乐健身，每天锻炼一小时，健康生活一辈子.
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="by">
+                By 2020.电信学院
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

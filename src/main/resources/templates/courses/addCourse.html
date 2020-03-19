@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>我的课程</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<div class="container login-content-container">
+
+    <form th:action="@{/addCourse}" id="register_form" method="post">
+        <h2 class="form-signin-heading">开设课程</h2>
+        <div class="col-md-12 alert alert-danger" role="alert" th:if="${Error}">
+            <p class="blog-label-error"  th:text="${errorMsg}"></p>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="name" class="col-form-label">课名</label>
+            <input type="text" class="form-control" id="name" name="name" maxlength="20" placeholder="请输入课名，至少2个字符，至多20个" >
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="text" class="col-form-label">课程描述</label>
+            <input type="text"  class="form-control" id="text" name="text" maxlength="50" placeholder="课程简述">
+        </div>
+        <div class="form-group col-md-12">
+<!--            <input type="text" value="2020-03-15 21:05" name="endTime" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">-->
+            <label for="dtp_input2" class="control-label">结束时间(从现在开始)</label>
+            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="dtp_input2" name="endTime" value="" />
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="project" class="col-form-label">所属项目</label>
+            <select class="form-control" id="project" name="projectId">
+                <option>请选择所属项目</option>
+                <option  th:each="pro:${projectList}" th:value="${pro.id}" th:text="${pro.name }"></option>
+            </select>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="courseTime" class="col-form-label">课时</label>
+            <input type="number" class="form-control" id="courseTime" name="courseTime" maxlength="30" placeholder="请输入课程课时" >
+        </div>
+        <div class="form-group col-md-12">
+            <label for="money" class="col-form-label">费用</label>
+            <input type="number" class="form-control" id="money" name="money" maxlength="30" placeholder="请输入课程费用" >
+        </div>
+        <input type="hidden" class="form-control" id="avatar" name="avatar" maxlength="30" value="/images/xiaozhan.jpg" placeholder="隐藏的input标签" >
+        <div class="form-group">
+            <button type="submit" id="submit_btn" class="btn btn-primary">提交</button>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+<script src="../static/js/jquery-1.8.3.min.js" th:src="@{js/jquery-1.8.3.min.js}"></script>
+<script th:src="@{js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{js/bootstrap-datetimepicker.zh-CN.js}"></script>
+<script  type="text/javascript">
+    $(function () {
+        $('.form_date').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>所有课程</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<style>
+    .course_box{
+
+    }
+    .course_item{
+        width: 30%;
+        margin-left:1%;
+        float:left;
+    }
+    .course_item .thumbnail img{
+        width: 270px;
+        height: 220px;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="course_box">
+                <div class="course_item"  th:each="course:${courseList}">
+                    <div class="thumbnail">
+                        <img src="..." th:src="${course.img}" alt="...">
+                        <div class="caption">
+                            <h3 th:text="${course.name}">course name</h3>
+                            <table class="table">
+                                <tr>
+                                    <td>课程描述:</td><td scope="row" th:text="${course.text}">id</td>
+                                </tr>
+                                <tr>
+                                    <td>开始时间:</td><td th:text="${course.formateTime(course.startTime)}">startTime</td>
+                                </tr>
+                                <tr>
+                                    <td>截止时间:</td><td th:text="${course.formateTime(course.endTime)}">endTime</td>
+                                </tr>
+                                <tr>
+                                    <td>课时:</td><td th:text="${course.courseTime}">endTime</td>
+                                </tr>
+                                <tr>
+                                    <td>费用:</td><td th:text="${course.money}">endTime</td>
+                                </tr>
+                            </table>
+                            <input type="hidden" id="course_id" th:value="${course.id}">
+                            <p> <a th:value="${course.id}" id="" class="btn btn-default selectCourseBtn" role="button">购买课程</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

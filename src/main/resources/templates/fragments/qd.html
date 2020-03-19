@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      data-th-fragment="qd"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="thumbnail">
+    <img src="../static/images/what's%20your%20goal.jpg" th:src="@{images/what is your goal.jpg}" alt="...">
+    <div class="caption">
+        <h3 th:href="@{qiandao}" th:if="${session.roleName}=='member'">每日签到</h3>
+        <h3 th:if="${session.roleName}=='teacher'">老师,您好!</h3>
+        <h4 th:if="${session.userInfo}==null">亲爱的游客，您好！</h4>
+        <h3 th:if="${session.userInfo}==null"><a th:href="@{register}" class="btn btn-success" role="button">成为会员</a></h3>
+        <p th:if="${session.userInfo}!=null">今日课程：</p><p th:each="course:${session.nowDayCourseList}" th:text="${course.name} ">瑜伽</p>
+        <p th:if="${session.roleName}=='member'"><a id="qd_btn" th:text="${session.qd_text}" class="btn btn-primary" role="button">签到</a></p>
+    </div>
+</div>
+</body>
+</html>

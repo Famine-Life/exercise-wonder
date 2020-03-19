@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+debug: true
+
+# thymeleaf
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: LEGACYHTML5   #不启用HTML5严格检查格式
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+    enabled: true
+  #数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/exercise?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wonder.exercise.entity

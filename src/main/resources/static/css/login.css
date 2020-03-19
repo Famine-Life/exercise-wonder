@@ -1,0 +1,10 @@
+.login-content-container{
+    margin-top: 2.0em;
+    background-color: #FFF;
+    width: 500px;
+}
+.errorTip{
+    text-align: center;
+    color: red;
+    font-size: 20px;
+}

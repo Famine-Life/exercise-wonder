@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+</head>
+    <body>
+
+    <div class="container login-content-container">
+		<form  th:action="@{/login}" method="post">
+			<h2 >请登录</h2>
+			<div class="col-md-12 alert alert-danger" role="alert" th:if="${loginError}">
+				<p class="blog-label-error"  th:text="${errorMsg}"></p>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="username" class="col-form-label">账号</label>
+				<input type="text"  class="form-control" id="username" name="username" maxlength="50" placeholder="请输入账号">
+	 
+			</div>
+			<div class="form-group col-md-12">
+				<label for="password" class="col-form-label">密码</label>
+				<input type="password"  class="form-control" id="password" name="password" maxlength="30" placeholder="请输入密码" >
+			</div>
+			<div class="form-group col-md-12">
+				 <input id="remember_account" type="checkbox" name="remember-me"> 记住我
+			</div>
+			<div class="form-group col-md-12">
+				<button type="submit" id="submit_btn" class="btn btn-primary">登录</button>
+			</div>
+
+		</form>
+    </div> <!-- /container -->
+
+	<!--    cookie plugin-->
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script>
+		function saveUserInfo() {
+			console.log("saveUserInfo cookie!")
+			//使用cookie记住账号密码 （单纯的不想每次都手写了）, 登录成功时调用
+			if ($("#remember_account").prop("checked") == true) {
+				var account_sid = $("#username").val();
+				var account_pwd = $("#password").val();
+				$.cookie("remember_account", "true", {
+					expires: 7
+				}); // 存储一个带7天期限的 cookie
+				$.cookie("account_sid", account_sid, {
+					expires: 7
+				}); // 存储一个带7天期限的 cookie
+				$.cookie("account_pwd", account_pwd, {
+					expires: 7
+				}); // 存储一个带7天期限的 cookie
+			} else {
+				$.cookie("remember_account", "false", {
+					expires: -1
+				}); // 删除 cookie
+				$.cookie("account_sid", '', {
+					expires: -1
+				});
+				$.cookie("account_pwd", '', {
+					expires: -1
+				});
+			}
+		}
+
+		$(document).ready(function() {
+
+					$("#submit_btn").click(function () {
+						console.log("save cookie");
+						saveUserInfo();
+					});
+
+					//如果含有该cookie，自动填写账号密码
+					if ($.cookie("remember_account")) {
+						console.log($.cookie("remember_account"))
+						$("#remember_account").prop("checked", true);
+						$("#username").val($.cookie("account_sid"));
+						$("#password").val($.cookie("account_pwd"));
+					} else {
+						console.error("cookie get error")
+					}
+		})
+	</script>
+
+    </body>
+
+</html>

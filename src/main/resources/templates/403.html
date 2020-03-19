@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>403 权限不足</title>
+    <head th:replace="~{fragments/header :: header}">
+<style>
+    .main{
+        height: 80%;
+    }
+    .jumbotron{
+        padding: 500px;
+    }
+</style>
+</head>
+<body class="nav-md">
+    <div class="main">
+        <!-- page content -->
+        <div class="jumbotron">
+            <h1 class="display-4">403</h1>
+            <p class="lead">权限不足，禁止访问</p>
+            <hr class="my-4">
+            <p>回到首页：</p>
+            <a class="btn btn-primary btn-lg" href="/" role="button">首页</a>
+        </div>
+    </div>
+
+</body>
+</html>

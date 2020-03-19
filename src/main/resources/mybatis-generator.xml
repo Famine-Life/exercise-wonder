@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<!--
+< jdbcConnection /> 数据库连接配置，至关重要
+<javaModelGenerator /> 指定自动生成的 POJO置于哪个包下
+<sqlMapGenerator /> 指定自动生成的 mapper.xml置于哪个包下
+<javaClientGenerator /> 指定自动生成的 DAO接口置于哪个包下
+<table /> 指定数据表名，可以使用_和%通配符-->
+<generatorConfiguration>
+    <context id="MySql" defaultModelType="flat">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!--   去除注释     -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/exercise?characterEncoding=utf-8" userId="root" password="123456" />
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.wonder.exercise.entity" targetProject="src/main/java"></javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources"></sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="com.wonder.exercise.dao" targetProject="src/main/java" type="XMLMAPPER"></javaClientGenerator>
+
+        <!-- table可以有多个,每个数据库中的表都可以写一个table，
+        tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,
+        只有匹配的表才会自动生成文件 -->
+<!--        <table tableName="exercise_user" domainObjectName = "User">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_user_card" domainObjectName="UserCard">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_project" domainObjectName="Project">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_place" domainObjectName="Place">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_palce_reserve" domainObjectName="PlaceReserve">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_time" domainObjectName="TimeQuantum">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_order" domainObjectName="Order">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_order_item" domainObjectName="OrderItem">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_course" domainObjectName="Course">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+
+<!--        <table tableName="exercise_user_course" domainObjectName="UserSelectCourse">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_qd" domainObjectName="qd">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+        <table tableName="exercise_user_wallet" domainObjectName="wallet">
+            <property name="modelOnly" value="false"/>
+            <!-- 数据库表主键 -->
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>

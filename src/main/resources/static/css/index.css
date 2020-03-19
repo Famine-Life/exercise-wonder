@@ -1,0 +1,25 @@
+.carousel .carousel-inner .item img{
+    max-width: 750px;
+    max-height: 400px;!important;
+    display: block;
+    margin: auto;
+}
+.carousel .carousel-inner .item{
+    background-color: #0f0f0f;
+}
+.list-group-item-text{
+    height: 100px;
+}
+.foot-text{
+    text-align: center;
+    font-size: 18px;
+    padding-top:12px;
+}
+
+.by{
+    text-align: center;
+    margin:20px;
+}
+.by:hover{
+    text-decoration: underline;
+}

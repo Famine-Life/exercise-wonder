@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>后台管理系统</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#user" aria-controls="home" role="tab" data-toggle="tab">用户管理</a></li>
+                    <li role="presentation"><a href="#course" aria-controls="profile" role="tab" data-toggle="tab">课程管理</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="user">
+                        <div th:insert="~{admins/userList :: userList}"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="course">
+                        <div th:insert="~{admins/courseList :: courseList}"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The modal -->
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
+     aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">编辑</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body" id="userFormContainer"></div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" id="submitEdit">提交</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

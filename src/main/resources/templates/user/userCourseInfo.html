@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>我的课程</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">我的课程</div>
+                <!-- Table -->
+                <table class="table">
+                   <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>课名</th>
+                            <th>开始时间</th>
+                            <th>截止时间</th>
+                            <th>场地</th>
+                        </tr>
+                   </thead>
+                    <tbody>
+                        <tr  th:each="course:${courseList}">
+                            <td scope="row" th:text="${course.id}">id</td>
+                            <td th:text="${course.name}">空空如也</td>
+                            <td th:text="${course.formateTime(course.startTime)}">startTime</td>
+                            <td th:text="${course.formateTime(course.endTime)}">endTime</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div calass="row">
+                <div class="col-md-12">
+                    <div th:replace="~{fragments/qd::qd}"></div>
+                </div>
+            </div>
+            <div calass="row"  th:if="${session.roleName}=='teacher'">
+                <div class="col-md-6">
+                    <a th:href="@{addCourse}" class="btn btn-info btn-md" role="button">发布课程</a>
+                </div>
+                <div class="col-md-6">
+                    <a th:href="@{getAttendance}" class="btn btn-info btn-md" role="button">查看考勤</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" src="../static/images/yoga-1842292_640.jpg" th:src="@{images/resizeApi.png}">
+                        </a>
+                    </div>
+                    <div class="foot-text">
+                        欢迎加入快乐健身，每天锻炼一小时，健康生活一辈子.
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="by">
+            By 2020.电信学院
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

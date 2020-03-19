@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>考勤情况</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>所有选课用户：</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${userList}">
+                    <td th:text="${user.id}">id</td>
+                    <td th:text="${user.realName}">realName</td>
+                    <td th:text="${user.phone}">phone</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>已签到用户：</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${qd_userList}">
+                    <td th:text="${user.id}">id</td>
+                    <td th:text="${user.realName}">realName</td>
+                    <td th:text="${user.phone}">phone</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>未签到用户：</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${not_qd_userList}">
+                    <td th:text="${user.id}">id</td>
+                    <td th:text="${user.realName}">realName</td>
+                    <td th:text="${user.phone}">phone</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
