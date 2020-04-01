@@ -21,5 +21,13 @@
 - courses
 ![courses](readme_image/course.png)
 
+- addCourse
+![addCourse](readme_image/addCourse.png)
+
 - manager
 ![manager](readme_image/manager.png)
+
+- yuyue
+![manager](readme_image/yuyue.png)
+![manager](readme_image/yuyue2.png)
+
