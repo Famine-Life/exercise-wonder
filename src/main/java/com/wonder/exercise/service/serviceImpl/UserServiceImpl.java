@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     public int deleteByPrimaryKey(Integer id) {
         return userMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<User> selectAllTeacher() {
+        return userMapper.selectAllTeacher();
+    }
 }

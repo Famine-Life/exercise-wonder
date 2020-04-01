@@ -1,7 +1,9 @@
 package com.wonder.exercise.controller;
 
+import com.wonder.exercise.entity.Course;
 import com.wonder.exercise.entity.User;
 import com.wonder.exercise.response.Msg;
+import com.wonder.exercise.service.CourseService;
 import com.wonder.exercise.service.UserService;
 import com.wonder.exercise.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class userController {
-
+    @Autowired
+    CourseService courseService;
     @Autowired
     UserService userService;
 
@@ -119,6 +123,29 @@ public class userController {
             return Msg.fail().add("result","删除失败!");
         }
         return  Msg.success().add("result","删除成功!");
+    }
+
+    /**
+     * 返回所有teacher用户
+     */
+    @GetMapping("teachers")
+    public String teacher(HttpServletRequest request, Model model){
+        List<User> userList = userService.selectAllTeacher();
+        model.addAttribute("teacherList",userList);
+        return "user/teachers";
+    }
+
+    /**
+     * 返回单个teacher用户详情
+     */
+    @GetMapping(value = "/teacher/{id}/detail")
+    public String teacherDetail(@PathVariable("id") Integer id, HttpServletRequest request, Model model){
+        System.out.println("teacher:"+id);
+        User user = userService.selectByPrimaryKey(id);
+        model.addAttribute("teacher",user);
+        List<Course> courses = courseService.selectByUser(user);
+        model.addAttribute("courseList",courses);
+        return "user/teacherDetail";
     }
 
 }

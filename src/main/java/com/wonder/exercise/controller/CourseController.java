@@ -1,14 +1,10 @@
 package com.wonder.exercise.controller;
 
-import com.wonder.exercise.entity.Course;
-import com.wonder.exercise.entity.Project;
-import com.wonder.exercise.entity.User;
-import com.wonder.exercise.entity.UserSelectCourse;
+import com.wonder.exercise.entity.*;
 import com.wonder.exercise.response.Msg;
-import com.wonder.exercise.service.CourseService;
-import com.wonder.exercise.service.ProjectService;
-import com.wonder.exercise.service.UserSelectCourseService;
+import com.wonder.exercise.service.*;
 import com.wonder.exercise.util.RoleEnum;
+import com.wonder.exercise.vo.commentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.stereotype.Controller;
@@ -31,6 +27,9 @@ import java.util.List;
 public class CourseController {
 
     @Autowired
+    CommentService commentService;
+
+    @Autowired
     CourseService courseService;
 
     @Autowired
@@ -38,6 +37,9 @@ public class CourseController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    UserService userService;
 
     /**
      * 返回所有课程信息页面
@@ -225,6 +227,43 @@ public class CourseController {
             return Msg.fail().add("result","删除失败!");
         }
         return  Msg.success().add("result","删除成功!");
+    }
+
+    /**
+     * 根据id查看单个课程详情
+     */
+    @GetMapping(value = "/course/{id}/detail")
+    public String courseDetail(@PathVariable("id") Integer id,HttpServletRequest request,Model model){
+        //System.out.println(id);
+        //获取课程
+        Course course = courseService.selectByPrimaryKey(id);
+        model.addAttribute("course",course);
+        //获取课程选课数量
+        UserSelectCourseExample userSelectCourseExample = new UserSelectCourseExample();
+        UserSelectCourseExample.Criteria criteria = userSelectCourseExample.createCriteria();
+        criteria.andCourseIdEqualTo(id);
+        long l = userSelectCourseService.countByExample(userSelectCourseExample);
+        //System.out.println("该课选课数量:"+l);
+        model.addAttribute("selectedCount",l);
+        //获取课程评论, 并使用Vo层返回
+        List<commentVo> commentVos=new ArrayList<commentVo>();
+        List<comment> comments = commentService.selectByCourseId(id);
+        for (comment comment: comments) {
+            commentVo commentVo = new commentVo();
+            commentVo.setId(comment.getId());
+            commentVo.setComment(comment.getComment());
+            commentVo.setCommentTime(comment.getCommentTime());
+            commentVo.setCourseId(comment.getCourseId());
+            commentVo.setUserId(comment.getUserId());
+            commentVo.setDelFlag(comment.getDelFlag());
+            User user = userService.selectByPrimaryKey(comment.getUserId());
+            commentVo.setUsername(user.getRealName());
+            commentVos.add(commentVo);
+        }
+        model.addAttribute("comments",commentVos);
+
+
+        return  "courses/courseDetail";
     }
 
 }

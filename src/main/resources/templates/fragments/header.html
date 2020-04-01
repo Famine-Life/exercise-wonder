@@ -7,14 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <!-- Bootstrap core CSS -->
-    <link href="../static/bootstrap-3.3.7/dist/css/bootstrap.min.css" th:href="@{bootstrap-3.3.7/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.7/dist/css/bootstrap.min.css" th:href="@{/bootstrap-3.3.7/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../static/bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" th:href="@{bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+    <link href="../static/bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" th:href="@{/bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="../static/css/header/navbar-fixed-top.css" th:href="@{css/header/navbar-fixed-top.css}" rel="stylesheet">
+    <link href="../static/css/header/navbar-fixed-top.css" th:href="@{/css/header/navbar-fixed-top.css}" rel="stylesheet">
 
-    <link href="../static/css/blog.css" th:href="@{css/login.css}" rel="stylesheet">
-    <link href="../static/css/index.css" th:href="@{css/index.css}" rel="stylesheet">
+    <link href="../static/css/blog.css" th:href="@{/css/login.css}" rel="stylesheet">
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet">
 
 
 
@@ -22,14 +22,14 @@
     <!--[if lt IE 9]>
     <script src="../static/bootstrap-3.3.7/docs/assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
-    <script src="../static/bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js" th:src="@{bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js}"></script>
+    <script src="../static/bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js" th:src="@{/bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js}"></script>
     <!-- 导入jq -->
 <!--    <script src="../static/js/jquery-1.3.2.min.js" th:src="@{js/jquery-1.3.2.min.js}"></script>-->
-    <script src="../static/js/jquery-1.8.3.min.js" th:src="@{js/jquery-1.8.3.min.js}"></script>
-    <script th:src="@{js/bootstrap-datetimepicker.min.js}"></script>
-    <script th:src="@{js/bootstrap-datetimepicker.zh-CN.js}"></script>
-    <script src="../static/js/courses.js" th:src="@{js/courses.js}"></script>
-    <script th:src="@{js/qd.js}"></script>
+    <script src="../static/js/jquery-1.8.3.min.js" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script src="../static/js/courses.js" th:src="@{/js/courses.js}"></script>
+    <script th:src="@{/js/qd.js}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -52,24 +52,25 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{index}">首页</a></li>
-                <li><a href="#courses" th:href="@{courses}">课程</a></li>
-                <li><a href="#contact">关于</a></li>
+                <li class="active"><a th:href="@{/index}">首页</a></li>
+                <li><a href="#courses" th:href="@{/courses}">课程</a></li>
+                <li><a href="#" th:href="@{/teachers}">教练</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{login}" th:if="${session.userInfo}==null">登录</a></li>
-                <li><a th:href="@{register}" th:if="${session.userInfo}==null">注册</a></li>
+                <li><a th:href="@{/login}" th:if="${session.userInfo}==null">登录</a></li>
+                <li><a th:href="@{/register}" th:if="${session.userInfo}==null">注册</a></li>
                 <li class="dropdown" th:if="${session.userInfo}!=null">
                     <a href="#" th:value="${session.userInfo.username}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span th:text="${session.userInfo.realName}"></span>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a th:href="@{getLoginUserInfo}">修改信息</a></li>
-                        <li><a th:href="@{getLoginUserCourse}">我的课程</a></li>
-                        <li><a th:href="@{wallet}">我的钱包</a></li>
-                        <li><a th:href="@{logout}">退出</a></li>
+                        <li><a th:href="@{/appointment}">我的预约</a></li>
+                        <li><a th:href="@{/getLoginUserInfo}">修改信息</a></li>
+                        <li><a th:href="@{/getLoginUserCourse}">我的课程</a></li>
+                        <li><a th:href="@{/wallet}">我的钱包</a></li>
+                        <li><a th:href="@{/logout}">退出</a></li>
                         <li th:if="${session.roleName}=='admin'" role="separator" class="divider"></li>
                         <li th:if="${session.roleName}=='admin'" class="dropdown-header">管理员操作：</li>
                         <li th:if="${session.roleName}=='admin'"><a th:href="@{admin}">后台管理</a></li>
@@ -85,7 +86,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../static/bootstrap-3.3.7/dist/js/bootstrap.min.js" th:src="@{bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
+<script src="../../static/bootstrap-3.3.7/dist/js/bootstrap.min.js" th:src="@{/bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

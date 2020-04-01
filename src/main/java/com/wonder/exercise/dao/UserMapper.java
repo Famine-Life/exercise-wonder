@@ -34,4 +34,6 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     List<User> selectAll();
+
+    List<User> selectAllTeacher();
 }

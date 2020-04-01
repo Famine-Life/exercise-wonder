@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>课程详情</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<style>
+    .course_box{
+
+    }
+    /*.course_item{*/
+    /*    width: 30%;*/
+    /*    margin-left:1%;*/
+    /*    float:left;*/
+    /*}*/
+    .course_item .thumbnail img{
+        max-width: 60%;
+        max-height: 440px;
+    }
+
+    .publish_comment {
+        clear: both;
+        margin-left: 5%;
+    }
+    .publish_comment span {
+        font-size: 1.3em;
+        color: slateblue;
+    }
+    .publish_comment textarea {
+        width: 90%;
+        resize: none;
+        color: rgba(0,0,0,0.78);
+        border-radius: 5px;
+        border: 1px solid slateblue;
+        padding: 0.3em;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        font-size: 1.3em;
+        height: 6.5em;
+    }
+    .send_comment_button {
+        width: 100px;
+        padding: 0.3em;
+        font-size: 1.2em;
+        background-color: slateblue;
+        color: white;
+        border-radius: 5px;
+        border: none;
+    }
+    .send_comment_button:hover {
+        cursor: pointer;
+    }
+
+    .one_comment {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+    .one_comment .username {
+        font-size: 1.3em;
+        margin-right: 30%;
+        color: rgba(0,0,0,0.82);
+    }
+    .one_comment .time {
+        margin-left: 20%;
+        font-size: 1.2em;
+        color: rgba(0,0,0,0.62);
+    }
+    .one_comment .content {
+        font-size: 1.3em;
+        text-indent: 2em;
+        color: rgba(0,0,0,0.62);
+    }
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="course_box">
+                <div class="course_item">
+                    <div class="thumbnail">
+                        <img src="..." th:src="${course.img}" alt="...">
+                        <div class="caption">
+                            <h3 class="course-name"><a th:href="@{/course/{course_id}/detail(course_id=${course.id})}" th:text="${course.name}">course name</a></h3>
+                            <table class="table">
+                                <tr>
+                                    <td>课程描述:</td><td scope="row" th:text="${course.text}">id</td>
+                                </tr>
+                                <tr>
+                                    <td>开始时间:</td><td th:text="${course.formateTime(course.startTime)}">startTime</td>
+                                </tr>
+                                <tr>
+                                    <td>截止时间:</td><td th:text="${course.formateTime(course.endTime)}">endTime</td>
+                                </tr>
+                                <tr>
+                                    <td>课时:</td><td th:text="${course.courseTime}">endTime</td>
+                                </tr>
+                                <tr>
+                                    <td>费用:</td><td th:text="${course.money}">endTime</td>
+                                </tr>
+                                <tr>
+                                    <td>已买人数:</td><td th:text="${selectedCount}">endTime</td>
+                                </tr>
+                            </table>
+                            <input type="hidden" id="course_id" th:value="${course.id}">
+                            <p> <a th:value="${course.id}" id="" class="btn btn-default selectCourseBtn" role="button">购买课程</a></p>
+                        </div>
+                        <div class="publish_comment">
+                            <span>评论：</span><br/><br/>
+                            <textarea class="comment_textarea" maxlength="122" placeholder="本次最多填写122个字" name="comment"></textarea>
+                            <br/>
+                            <button class="send_comment_button">发表</button>
+                        </div>
+                        <div class="comment_content">
+                            <div class="one_comment" th:each="comment:${comments}">
+                                <span class="username" th:text="${comment.username}+':'">用户：1211110</span>
+                                <span class="time" th:with="time = ${comment.commentTime}"
+                                      th:text="'发表于 '+${#dates.format(time,'yyyy-MM-dd HH:mm:ss')}">发表于：2020-03-01 22:22:22</span>
+                                <p class="content" th:text="${comment.comment}">123456789123</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.send_comment_button').click(function () {
+            var value = $('.comment_textarea').val();
+            var $comment = $('.comment_content');
+            var id = $('#course_id').attr("value");
+            console.log("course id , comment", id);
+            $.ajax({
+                url: '/comment',
+                type: 'post',
+                dataType: 'JSON',
+                data: {id: id, context: value},
+                success: function (data) {
+                    console.log(data);
+                    var result = data.code;
+                    if (result == 2) {
+                        alert(data.msg);
+                    } else if (result == 0) {
+                        alert(data.msg);
+                    } else if (result == 1) {
+                        alert(data.msg);
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

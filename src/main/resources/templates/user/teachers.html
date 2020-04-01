@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>所有教练</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<style>
+    .course_box{
+
+    }
+    .course_item{
+        width: 30%;
+        margin-left:1%;
+        float:left;
+    }
+    .course_item .thumbnail img{
+        width: 270px;
+        height: 220px;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="course_box">
+                <div class="course_item"  th:each="teacher:${teacherList}">
+                    <div class="thumbnail">
+                        <img src="../static/images/girl.jpg" th:src="${teacher.url}" alt="...">
+                        <div class="caption">
+                            <h3 class="course-name teacher-name"><a th:href="@{teacher/{teacher_id}/detail(teacher_id=${teacher.id})}" th:text="${teacher.realName}">course name</a></h3>
+<!--                            <table class="table">-->
+<!--                                <tr>-->
+<!--                                    <td>课程描述:</td><td scope="row" th:text="${course.text}">id</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>开始时间:</td><td th:text="${course.formateTime(course.startTime)}">startTime</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+                            <input type="hidden" id="course_id" th:value="${teacher.id}">
+                            <!-- Button trigger modal -->
+                            <button type="button" th:value="${teacher.id}" class="btn btn-primary btn-sm yy-btn" data-toggle="modal" data-target="#myModal">
+                                预约ta
+                            </button>
+<!--                            <p> <a th:value="${teacher.id}" id="" class="btn btn-default yy-btn" role="button">预约ta</a></p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择预约时间</h4>
+            </div>
+            <div class="modal-body" style="overflow: hidden">
+                <div class="form-group col-md-12">
+                    <div>
+                        <input type="hidden" value="" class="yy-id" />
+                        <p class="yy-name"></p>
+                    </div>
+                    <!--            <input type="text" value="2020-03-15 21:05" name="endTime" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii">-->
+                    <label for="dtp_input2" class="control-label">预约时间</label>
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" name="endTime" value="" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary yy-submit-btn">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../static/js/jquery-1.8.3.min.js" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+<script  type="text/javascript">
+    $(function () {
+        //时间控件
+        $('.form_date').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+        //预约
+        $(".yy-btn").click(function () {
+            //$('#myModal').modal('toggle');
+            //let course_id = $(this).val();
+            let teacher_id = $(this).attr("value");
+            let teacher_name = $(this).siblings(".teacher-name").text();
+            $(".yy-id").val(teacher_id);
+            $(".yy-name").text(teacher_name);
+
+            console.log("teacher_id:",teacher_id);
+            console.log("teacher_name:",teacher_name);
+
+        })
+
+        $(".yy-submit-btn").click(function () {
+            let yyid = $(".yy-id").val();
+            let yyname = $(".yy-name").text();
+            console.log("yyid:",yyid)
+            console.log("yyname:",yyname)
+            let time = $("#dtp_input2").val();
+            console.log(time);
+            if(time==''||time==null){
+                alert("请选择一个时间在提交!");
+                return;  //不再往下执行
+            }
+            let data={
+                id:yyid,
+                time:time
+            };
+            $.ajax({
+                url:"/appointment",
+                contentType:"application/json",
+                type:"post",
+                data:JSON.stringify(data),
+                success:function (res) {
+                  console.log(res);
+                  if(res.code===100){
+                      alert("提交预约成功!");
+                  }
+                  if(res.code===200){
+                      alert(res.extend.result);
+                  }
+                }
+            });
+        });
+
+    })
+
+</script>
+</body>
+</html>

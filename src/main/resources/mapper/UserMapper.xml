@@ -80,6 +80,11 @@
     select <include refid="Base_Column_List"></include>
     from exercise_user
   </select>
+  <select id="selectAllTeacher" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"></include>
+    from exercise_user
+    where role = 2
+  </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

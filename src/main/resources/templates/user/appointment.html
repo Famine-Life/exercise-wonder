@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<title>我的预约</title>
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3 style="color:#f0ad4e">今日预约</h3>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr th:each="appointmentVo:${todayAppointmentList}">
+                    <td th:if="${session.roleName}=='teacher'" th:text="'预约人: '+${appointmentVo.requestUsername}"></td>
+                    <td th:if="${session.roleName}!='teacher'" th:text="'预约教练: '+${appointmentVo.requestedUsername}"></td>
+                    <td th:text="'预约时间: '+${appointmentVo.formateTime(appointmentVo.appointmentTime)}"></td>
+                    <td th:if="${session.roleName}=='teacher'">
+                        <!-- Standard button -->
+                        <button th:if="${appointmentVo.accept}==0" th:value="${appointmentVo.id}" type="button" class="btn btn-default accept-btn">接受</button>
+                        <button th:if="${appointmentVo.accept}==1" type="button" class="btn btn-default">已接受</button>
+                    </td>
+                    <td th:if="${session.roleName}!='teacher'">
+                        <!-- Standard button -->
+                        <div  th:if="${appointmentVo.accept}==0"><span  class="label label-danger" type="button">未接受</span></div>
+                        <div  th:if="${appointmentVo.accept}==1"><span  class="label label-success" type="button">已接受</span></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <h3 style="color:#d9534f">未接受预约</h3>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr th:each="appointmentVo:${notAcceptAppointmentList}">
+                    <td th:if="${session.roleName}=='teacher'" th:text="'预约人: '+${appointmentVo.requestUsername}"></td>
+                    <td th:if="${session.roleName}!='teacher'" th:text="'预约教练: '+${appointmentVo.requestedUsername}"></td>
+                    <td th:text="'预约时间: '+${appointmentVo.formateTime(appointmentVo.appointmentTime)}"></td>
+                    <td th:if="${session.roleName}=='teacher'">
+                        <!-- Standard button -->
+                        <button th:if="${appointmentVo.accept}==0" th:value="${appointmentVo.id}" type="button" class="btn btn-default accept-btn">接受</button>
+                        <button th:if="${appointmentVo.accept}==1" type="button" class="btn btn-default">已接受</button>
+                    </td>
+                    <td th:if="${session.roleName}!='teacher'">
+                        <!-- Standard button -->
+                        <div  th:if="${appointmentVo.accept}==0"><span  class="label label-danger" type="button">未接受</span></div>
+                        <div  th:if="${appointmentVo.accept}==1"><span  class="label label-success" type="button">已接受</span></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3 style="color:#337ab7">所有预约</h3>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr th:each="appointmentVo:${allAppointments}">
+                    <td th:if="${session.roleName}=='teacher'" th:text="'预约人: '+${appointmentVo.requestUsername}"></td>
+                    <td th:if="${session.roleName}!='teacher'" th:text="'预约教练: '+${appointmentVo.requestedUsername}"></td>
+                    <td th:text="'预约时间: '+${appointmentVo.formateTime(appointmentVo.appointmentTime)}"></td>
+                    <td th:if="${session.roleName}=='teacher'">
+                        <!-- Standard button -->
+                        <button th:if="${appointmentVo.accept}==0" th:value="${appointmentVo.id}" type="button" class="btn btn-default accept-btn">接受</button>
+                        <button th:if="${appointmentVo.accept}==1" type="button" class="btn btn-default">已接受</button>
+                    </td>
+                    <td th:if="${session.roleName}!='teacher'">
+                        <!-- Standard button -->
+                        <div  th:if="${appointmentVo.accept}==0"><span  class="label label-danger" type="button">未接受</span></div>
+                        <div  th:if="${appointmentVo.accept}==1"><span  class="label label-success" type="button">已接受</span></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <h3 style="color:#5cb85c">已接受预约</h3>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr th:each="appointmentVo:${acceptAppointmentList}">
+                    <td th:if="${session.roleName}=='teacher'" th:text="'预约人: '+${appointmentVo.requestUsername}"></td>
+                    <td th:if="${session.roleName}!='teacher'" th:text="'预约教练: '+${appointmentVo.requestedUsername}"></td>
+                    <td th:text="'预约时间: '+${appointmentVo.formateTime(appointmentVo.appointmentTime)}"></td>
+                    <td th:if="${session.roleName}=='teacher'">
+                        <!-- Standard button -->
+                        <button th:if="${appointmentVo.accept}==0" th:value="${appointmentVo.id}" type="button" class="btn btn-default accept-btn">接受</button>
+                        <button th:if="${appointmentVo.accept}==1" type="button" class="btn btn-default">已接受</button>
+                    </td>
+                    <td th:if="${session.roleName}!='teacher'">
+                        <!-- Standard button -->
+                        <div  th:if="${appointmentVo.accept}==0"><span  class="label label-danger" type="button">未接受</span></div>
+                        <div  th:if="${appointmentVo.accept}==1"><span  class="label label-success" type="button">已接受</span></div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".accept-btn").click(function () {
+            let appointmentId = $(this).attr("value");
+            $.ajax({
+                url:"/acceptApointment",
+                type:"POST",
+                data:{
+                    id:appointmentId
+                },
+                success:function (res) {
+                    console.log(res);
+                    if(res.code===100){
+                        alert("已接受预约!");
+                        window.location.reload();
+                    }
+                    if(res.code===200){
+                        alert(res.extend.result);
+                    }
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

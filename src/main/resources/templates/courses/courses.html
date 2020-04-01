@@ -28,7 +28,7 @@
                     <div class="thumbnail">
                         <img src="..." th:src="${course.img}" alt="...">
                         <div class="caption">
-                            <h3 th:text="${course.name}">course name</h3>
+                            <h3 class="course-name"><a th:href="@{course/{course_id}/detail(course_id=${course.id})}" th:text="${course.name}">course name</a></h3>
                             <table class="table">
                                 <tr>
                                     <td>课程描述:</td><td scope="row" th:text="${course.text}">id</td>

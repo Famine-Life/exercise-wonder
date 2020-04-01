@@ -24,7 +24,7 @@ public class UserSelecyCourseServiceImpl implements UserSelectCourseService {
 
     @Override
     public long countByExample(UserSelectCourseExample example) {
-        return 0;
+        return userSelectCourseMapper.countByExample(example);
     }
 
     @Override

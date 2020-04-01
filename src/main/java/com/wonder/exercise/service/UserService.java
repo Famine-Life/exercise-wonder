@@ -22,4 +22,6 @@ public interface UserService {
 
     int deleteByPrimaryKey(Integer id);
 
+    List<User> selectAllTeacher();
+
 }

@@ -85,7 +85,17 @@
 <!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
 <!--        </table>-->
-        <table tableName="exercise_user_wallet" domainObjectName="wallet">
+<!--        <table tableName="exercise_user_wallet" domainObjectName="wallet">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+<!--        <table tableName="exercise_comment" domainObjectName="comment">-->
+<!--            <property name="modelOnly" value="false"/>-->
+<!--            &lt;!&ndash; 数据库表主键 &ndash;&gt;-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
+        <table tableName="exercise_appointment" domainObjectName="appointment">
             <property name="modelOnly" value="false"/>
             <!-- 数据库表主键 -->
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />

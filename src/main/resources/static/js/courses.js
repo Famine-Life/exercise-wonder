@@ -4,18 +4,19 @@ $(function () {
         let course_id = $(this).attr("value");
         console.log("course_id",course_id);
         $.ajax({
-            url:"popmoney",
+            url:"/popmoney",
             data:{
                 "id":course_id
             },
             type:"post",
             success:function (res) {
                 console.log(res);
+                console.log(res.extend.result);
                 if(res.code===100){
                     alert(res.extend.result);
                     //选课
                     $.ajax({
-                        url:"addSelectCourse",
+                        url:"/addSelectCourse",
                         data:{
                             "id":course_id
                         },
@@ -41,5 +42,12 @@ $(function () {
 
     })
 
+    // $(".course-name").click(function () {
+    //     let course_id = $(this).siblings("#course_id").attr("value");
+    //     console.log(course_id);
+    //
+    //
+    //
+    // })
 
 })

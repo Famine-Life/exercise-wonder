@@ -2,9 +2,11 @@ package com.wonder.exercise.controller;
 
 import com.wonder.exercise.entity.Course;
 import com.wonder.exercise.entity.User;
+import com.wonder.exercise.entity.UserSelectCourse;
 import com.wonder.exercise.entity.wallet;
 import com.wonder.exercise.response.Msg;
 import com.wonder.exercise.service.CourseService;
+import com.wonder.exercise.service.UserSelectCourseService;
 import com.wonder.exercise.service.walletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 钱包处理器
  */
 @Controller
 public class WalletController {
+
+    @Autowired
+    UserSelectCourseService userSelectCourseService;
+
     @Autowired
     walletService walletService;
 
@@ -63,7 +70,7 @@ public class WalletController {
     public Msg pushMoney(HttpServletRequest request, Model model, @RequestParam("money") String money){
         User userInfo = (User) request.getSession().getAttribute("userInfo");
         if(userInfo==null){
-            return Msg.fail().add("resutl","请先登录!");
+            return Msg.fail().add("result","请先登录!");
         }
         wallet wallet = walletService.selectByUserId(userInfo.getId());
         BigDecimal old_money = wallet.getMoney();
@@ -87,8 +94,18 @@ public class WalletController {
     public Msg popMoney(HttpServletRequest request, Model model, @RequestParam("id") Integer course_id){
         User userInfo = (User) request.getSession().getAttribute("userInfo");
         if(userInfo==null){
-            return Msg.fail().add("resutl","请先登录!");
+            return Msg.fail().add("result","请先登录!");
         }
+        //判断该账号是否已经选了该课程
+        List<UserSelectCourse> userSelectCourses = userSelectCourseService.selectByUserId(userInfo.getId());
+        for (UserSelectCourse userSelectCourse:userSelectCourses) {
+            //如果当前账号在选课表中已有相同的课程id，那么为已选
+            if(userSelectCourse.getCourseId().equals(course_id)){
+                return Msg.fail().add("result","当前课程您已经拥有！请选择其他课程!");
+            }
+        }
+
+        //获取钱包信息
         wallet wallet = walletService.selectByUserId(userInfo.getId());
         BigDecimal user_money = wallet.getMoney();
 
