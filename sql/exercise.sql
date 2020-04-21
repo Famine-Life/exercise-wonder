@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 14/04/2020 12:43:02
+ Date: 21/04/2020 15:24:38
 */
 
 SET NAMES utf8mb4;
@@ -80,9 +80,8 @@ CREATE TABLE `exercise_course`  (
   `del_flag` int(2) NULL DEFAULT 0 COMMENT '删除标志位：0：存在，1：删除',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '最后一次更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `project_id`(`project_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of exercise_course
